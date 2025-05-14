@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/jbrcoleman/crossplane-eks.git'
-    path: 'resources/aws-provider/composite-resources/vpc/vpc.yaml'
+    path: 'resources/aws-provider/composite-resources/vpc/'
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
