@@ -45,3 +45,9 @@ variable "enable_helm_provider" {
   description = "Installs the helm provider"
   default     = true
 }
+
+variable "enable_komoplane" {
+  type        = bool
+  description = "Installs Komoplane for Crossplane visualization"
+  default     = true
+}

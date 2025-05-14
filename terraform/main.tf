@@ -476,6 +476,30 @@ resource "kubectl_manifest" "helm_provider_config" {
 }
 
 #---------------------------------------------------------------
+# Komoplane - Crossplane Visualization
+#---------------------------------------------------------------
+module "komoplane" {
+  count   = local.komoplane.enable == true ? 1 : 0
+  source  = "aws-ia/eks-blueprints-addon/aws"
+  version = "1.1.1"
+
+  name             = "komoplane"
+  description      = "A Helm chart to deploy Komoplane for Crossplane visualization"
+  namespace        = local.komoplane.namespace
+  create_namespace = true
+  chart            = "komoplane"
+  chart_version    = local.komoplane.chart_version
+  repository       = "https://komodorio.github.io/helm-charts"
+  timeout          = "300"
+  values = [
+    templatefile("${path.module}/values/komoplane.yaml", {})
+  ]
+
+  depends_on = [module.crossplane, time_sleep.addons_wait_60_seconds]
+}
+
+
+#---------------------------------------------------------------
 # Supporting Resources
 #---------------------------------------------------------------
 

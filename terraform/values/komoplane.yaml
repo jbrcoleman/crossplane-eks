@@ -1,0 +1,40 @@
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: "" # No IAM role needed for visualization only
+
+deployment:
+  replicas: 1
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+service:
+  type: LoadBalancer
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+
+ingress:
+  enabled: false
+
+config:
+  log:
+    level: "info"
+  server:
+    address: ":8090"
+
+# Configure access to Crossplane resources
+rbac:
+  create: true
+  rules:
+    - apiGroups: ["apiextensions.crossplane.io"]
+      resources: ["compositions", "compositeresourcedefinitions"]
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["aws.upbound.io", "ec2.aws.crossplane.io", "network.awsblueprints.io"]
+      resources: ["*"]
+      verbs: ["get", "list", "watch"]

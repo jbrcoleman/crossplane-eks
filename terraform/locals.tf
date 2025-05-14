@@ -13,4 +13,10 @@ locals {
     Blueprint  = local.name
     GithubRepo = "github.com/awslabs/crossplane-on-eks"
   }
+
+  komoplane = {
+    enable      = var.enable_komoplane # defaults to true
+    namespace   = "komoplane-system"
+    chart_version = "0.1.6"
+  }
 }
