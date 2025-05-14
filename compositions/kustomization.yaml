@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- aws-provider/vpc-subnets/definition.yaml
+- aws-provider/vpc-subnets/vpc-composition-networkid.yaml
+- aws-provider/vpc-subnets/vpc-composition.yaml
+- aws-provider/vpc/definition.yaml
+- aws-provider/vpc/vpc-composition.yaml

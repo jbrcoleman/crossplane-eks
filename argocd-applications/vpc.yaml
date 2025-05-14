@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-resources
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/jbrcoleman/crossplane-eks.git'
+    path: 'resources/aws-provider/composite-resources/vpc/vpc.yaml'
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: crossplane-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

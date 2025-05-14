@@ -13,7 +13,7 @@ variable "name" {
 variable "cluster_version" {
   type        = string
   description = "Kubernetes Version"
-  default     = "1.30"
+  default     = "1.32"
 }
 
 variable "capacity_type" {
@@ -31,7 +31,7 @@ variable "enable_upjet_aws_provider" {
 variable "enable_aws_provider" {
   type        = bool
   description = "Installs the contrib aws provider"
-  default     = false
+  default     = true
 }
 
 variable "enable_kubernetes_provider" {
